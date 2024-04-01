@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "877099889315",
+    "project_id": "project-1-190711",
+    "storage_bucket": "project-1-190711.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877099889315:android:3d6379e95219e332630516",
+        "android_client_info": {
+          "package_name": "com.homey.firebasetest1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDra74psqI_qkol6aMIBhkKr_ql6lHnX5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877099889315:android:93bf5d0cbb8a745e630516",
+        "android_client_info": {
+          "package_name": "com.homey.homeysystemsappv10"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDra74psqI_qkol6aMIBhkKr_ql6lHnX5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877099889315:android:e73f288afdcda7ad630516",
+        "android_client_info": {
+          "package_name": "com.homey.viewmodeltester"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDra74psqI_qkol6aMIBhkKr_ql6lHnX5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
