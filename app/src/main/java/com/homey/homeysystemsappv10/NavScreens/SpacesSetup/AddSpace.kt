@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.buildingsListCard
 import com.homey.homeysystemsappv10.R
 
 
@@ -26,7 +27,8 @@ fun CustomDialog(
     onDone: () -> Unit,
     title: String,
     spaceName: String, // Parameter to receive building name
-    onSpaceNameChange: (String) -> Unit
+    onSpaceNameChange: (String) -> Unit,
+    showBuildingListCard: Boolean
 
 ) {
     //Sheet state that fully expands when invoked
@@ -46,7 +48,7 @@ fun CustomDialog(
                 title = "Add To $title"
         ) }
     ){
-        addSpaceContent(spaceName,onSpaceNameChange)
+        addSpaceContent(spaceName,onSpaceNameChange, showBuildingListCard)
     }
 }
 
@@ -55,7 +57,8 @@ fun CustomDialog(
 fun addSpaceContent(
     //Initialize the viewModel to invoke writes to the database
     spaceName: String, // Parameter to receive building name
-    onSpaceNameChange: (String) -> Unit
+    onSpaceNameChange: (String) -> Unit,
+    showBuildingListCard: Boolean
 
 ) {
 
@@ -83,6 +86,10 @@ fun addSpaceContent(
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
+
+        if (showBuildingListCard){
+            buildingsListCard()
+        }
 
         Text(
             "BACKGROUND PHOTO"

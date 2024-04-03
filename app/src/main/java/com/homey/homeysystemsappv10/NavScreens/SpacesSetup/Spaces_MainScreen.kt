@@ -40,9 +40,10 @@ fun spacesMainScreen(
     onCardClick: (String) -> Unit = {},
     spaceName: String,
     onSpaceNameChange: (String) -> Unit,
-    onBackButtonPressed: () -> Unit = {}
+    onBackButtonPressed: () -> Unit = {},
+    showBuildingListCard: Boolean = false
 ) {
-    var effectKey by remember { mutableStateOf(true) }
+
 
     Scaffold(
         topBar = {
@@ -69,10 +70,6 @@ fun spacesMainScreen(
         }
     ) { innerPadding ->
         // Call fetchBuildings() when the screen initializes
-        LaunchedEffect(key1 = effectKey) {
-
-
-        }
 
         Column(
             modifier = Modifier
@@ -124,7 +121,8 @@ fun spacesMainScreen(
                 onDone = { addSpace() },
                 title = title,
                 spaceName = spaceName,
-                onSpaceNameChange = onSpaceNameChange
+                onSpaceNameChange = onSpaceNameChange,
+                showBuildingListCard = showBuildingListCard
             )
         }
 
