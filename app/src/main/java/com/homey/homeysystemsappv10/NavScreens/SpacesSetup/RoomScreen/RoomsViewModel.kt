@@ -79,7 +79,10 @@ class RoomsViewModel(var buildingName: String = ""): ViewModel() {
             val rooms = roomRepository.fetchRoomsFromBuilding(buildingName)
             _roomList.clear()
             _roomList.addAll(rooms.map { it.name })
+
         }
+
+
     }
 
     init {
