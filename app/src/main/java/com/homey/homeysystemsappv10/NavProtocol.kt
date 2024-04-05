@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.homey.homeysystemsappv10.NavScreens.AnalyticsScreen.AnalyticsScreen
 import com.homey.homeysystemsappv10.NavScreens.HomeScreen.HomeScreen
 import com.homey.homeysystemsappv10.NavScreens.LogInScreen
+import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.allRoomsScreen
 import com.homey.viewmodeltester.SpacesSetup.BuildingScreen.buildingScreen
 import com.homey.viewmodeltester.SpacesSetup.RoomScreen.RoomsViewModel
 import com.homey.viewmodeltester.SpacesSetup.RoomScreen.roomScreen
@@ -48,6 +49,9 @@ fun StartNav() {
 
         composable(NavRoutes.AnalyticsScreen.route) {
             AnalyticsScreen(navController = navController)
+        }
+        composable(NavRoutes.AllRoomsScreen.route){
+            allRoomsScreen(navController = navController)
         }
 
     }

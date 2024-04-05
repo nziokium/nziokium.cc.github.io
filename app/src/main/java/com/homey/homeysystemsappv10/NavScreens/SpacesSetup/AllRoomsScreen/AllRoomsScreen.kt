@@ -13,15 +13,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BuildingsViewModel
+import com.homey.viewmodeltester.SpacesSetup.RoomScreen.RoomsViewModel
+import com.homey.viewmodeltester.SpacesSetup.spacesMainScreen
 
-fun allRoomsScreen() {
+@Composable
+fun allRoomsScreen(navController: NavController) {
+    val roomsViewModel = RoomsViewModel()
+    val allRoomsViewModel = AllRoomsViewModel()
 
+    spacesMainScreen(
+        title = "Rooms",
+        fabButtonClick = { roomsViewModel.onAddClick() },
+        itemArray = allRoomsViewModel.roomList,
+        isDialogShown = roomsViewModel.isDialogShown,
+        onCancelClick = { roomsViewModel.onCancelClick() },
+        addSpace = { roomsViewModel.addRoom() },
+        showBuildingListCard = true,
+        onBackButtonPressed = { navController.popBackStack() }
+
+
+
+    )
 }
 
 
 @Composable
 fun RoundCheckboxList(values: List<String>) {
     var checkedIndex by remember { mutableStateOf(-1) }
+
+
 
     Column (
         modifier = Modifier
@@ -69,7 +91,8 @@ fun RoundCheckboxList(values: List<String>) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun buildingsListCard() {
-    val options = listOf("Building 1", "Building 2", "Building 3")
+    val viewModel = BuildingsViewModel()
 
+    val options = viewModel.buildingArray
     RoundCheckboxList(values = options)
 }

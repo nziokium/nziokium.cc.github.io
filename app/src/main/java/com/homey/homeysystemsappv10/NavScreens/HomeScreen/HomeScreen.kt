@@ -184,7 +184,7 @@ fun HomeScreen(navController: NavHostController) {
 
             //Add the room Button
             Button(
-                onClick = {/*TODO*/ },
+                onClick = {navController.navigate(NavRoutes.AllRoomsScreen.route) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.5f, fill = true),
