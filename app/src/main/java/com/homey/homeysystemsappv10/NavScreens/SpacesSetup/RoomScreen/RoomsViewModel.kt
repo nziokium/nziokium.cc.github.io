@@ -21,6 +21,8 @@ class RoomsViewModel(var buildingName: String = ""): ViewModel() {
 
 
 
+
+
     val roomRepository = RoomRepository()
 
     fun addRoom() {
@@ -33,12 +35,13 @@ class RoomsViewModel(var buildingName: String = ""): ViewModel() {
         }
     }
 
-
-    //Create the logic for showing and hiding the dialog box
-
     //Dialog should be hidden by default
     var isDialogShown by mutableStateOf(false)
         private set
+
+    //Create the logic for showing and hiding the dialog box
+
+
 
     fun onAddClick(){
         isDialogShown = true

@@ -77,6 +77,20 @@ fun BackButton(
     }
 }
 
+@Composable
+fun analyticsButton(
+    onClick: () -> Unit = {}
+){
+    IconButton(
+        onClick = onClick
+    ){
+        Image(
+            painterResource(R.drawable.octicon_graph_24),
+            contentDescription = "Navigate to Analytics"
+        )
+    }
+}
+
 
 @Preview(showBackground = true, showSystemUi = false)
 @Composable

@@ -11,8 +11,8 @@ fun roomScreen(
     viewModel: RoomsViewModel // Initialize RoomViewModel with buildingName
 ) {
     spacesMainScreen(
-        //Changed for the culture
-        title = viewModel.buildingName,
+
+        title = "Rooms",
 
         fabButtonClick = { viewModel.onAddClick() },
         itemArray = viewModel.roomList,

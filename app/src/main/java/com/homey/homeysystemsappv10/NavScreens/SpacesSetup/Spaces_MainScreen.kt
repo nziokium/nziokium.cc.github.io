@@ -24,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.CustomDialog
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BuildingsViewModel
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.TopScreenBar
+import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.analyticsButton
 import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.AllRoomsViewModel
 import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.RoomToBuilding
 import com.homey.homeysystemsappv10.R
@@ -35,15 +36,15 @@ import com.homey.homeysystemsappv10.R
 fun spacesMainScreen(
     title: String,
     fabButtonClick: () -> Unit,
-    itemArray: List<Any>, // Change the type to Any
+    itemArray: List<Any>,
     isDialogShown: Boolean,
     onCancelClick: () -> Unit,
-    addSpace: () -> Unit,
+    addSpace: () -> Unit = {},
     onCardClick: (String) -> Unit = {},
     spaceName: String = "",
     onSpaceNameChange: (String) -> Unit = {},
     onBackButtonPressed: () -> Unit = {},
-    showBuildingListCard: Boolean = false
+    showBuildingListCard: @Composable () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -53,7 +54,7 @@ fun spacesMainScreen(
                         onBackButtonPressed()
                     }
                 )
-            }, { SearchButtonIcon() })
+            }, { analyticsButton() })
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -63,12 +64,10 @@ fun spacesMainScreen(
                 Icon(
                     Icons.Default.Add,
                     contentDescription = "Add"
-
                 )
             }
         }
     ) { innerPadding ->
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -80,8 +79,7 @@ fun spacesMainScreen(
             ) {
                 items(itemArray.chunked(2)) { rowItems ->
                     LazyRow(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         items(rowItems) { item ->
@@ -94,30 +92,22 @@ fun spacesMainScreen(
                                     .padding(8.dp)
                                     .border(width = 2.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
                                     .clickable {
-                                        if (item is RoomToBuilding) {
-                                           /*TODO*/
-                                        } else if (item is String) {
-                                            // Handle click for string
-                                            onCardClick(item)
-                                        }
+                                        onCardClick(item.toString())
                                         Log.d("Message", "card clicked")
                                     },
                                 colors = CardDefaults.cardColors(
                                     containerColor = Color.White
                                 )
                             ) {
-                                if (showBuildingListCard && item is RoomToBuilding) {
-                                    Text(item.buildingName, modifier = Modifier.padding(16.dp))
-                                    Text(item.roomName, modifier = Modifier.padding(16.dp))
-                                } else if (!showBuildingListCard && item is String) {
-                                    Text(item, modifier = Modifier.padding(16.dp))
-                                }
+                                Text(item.toString(), modifier = Modifier.padding(8.dp))
                             }
                         }
                     }
                 }
             }
         }
+
+        // Placing the dialog outside the LazyColumn
         if (isDialogShown) {
             CustomDialog(
                 onDismiss = { onCancelClick() },
@@ -131,6 +121,7 @@ fun spacesMainScreen(
         }
     }
 }
+
 
 
 //Create the Search Icon
