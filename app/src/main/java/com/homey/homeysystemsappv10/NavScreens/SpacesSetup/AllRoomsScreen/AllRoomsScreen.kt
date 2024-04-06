@@ -13,24 +13,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BuildingsViewModel
 import com.homey.viewmodeltester.SpacesSetup.RoomScreen.RoomsViewModel
 import com.homey.viewmodeltester.SpacesSetup.spacesMainScreen
 
 @Composable
-fun allRoomsScreen(navController: NavController) {
-    val roomsViewModel = RoomsViewModel()
-    val allRoomsViewModel = AllRoomsViewModel()
+fun allRoomsScreen(
+    navController: NavController,
+    viewModel: AllRoomsViewModel = viewModel()
+) {
+
 
     spacesMainScreen(
         title = "Rooms",
-        fabButtonClick = { roomsViewModel.onAddClick() },
-        itemArray = allRoomsViewModel.roomList,
-        isDialogShown = roomsViewModel.isDialogShown,
-        onCancelClick = { roomsViewModel.onCancelClick() },
-        addSpace = { roomsViewModel.addRoom() },
-        showBuildingListCard = true,
+        fabButtonClick = { viewModel.onAddClick() },
+        itemArray = viewModel.roomList.map { it.roomName },
+        isDialogShown = viewModel.isDialogShown,
+        onCancelClick = { viewModel.onCancelClick() },
+        showBuildingListCard = { buildingsListCard() },
         onBackButtonPressed = { navController.popBackStack() }
 
 

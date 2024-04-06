@@ -35,15 +35,15 @@ import com.homey.homeysystemsappv10.R
 fun spacesMainScreen(
     title: String,
     fabButtonClick: () -> Unit,
-    itemArray: List<Any>, // Change the type to Any
+    itemArray: List<String>, // Change the type to Any
     isDialogShown: Boolean,
     onCancelClick: () -> Unit,
-    addSpace: () -> Unit,
+    addSpace: () -> Unit = {},
     onCardClick: (String) -> Unit = {},
     spaceName: String = "",
     onSpaceNameChange: (String) -> Unit = {},
     onBackButtonPressed: () -> Unit = {},
-    showBuildingListCard: Boolean = false
+    showBuildingListCard: @Composable () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -94,24 +94,15 @@ fun spacesMainScreen(
                                     .padding(8.dp)
                                     .border(width = 2.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
                                     .clickable {
-                                        if (item is RoomToBuilding) {
-                                           /*TODO*/
-                                        } else if (item is String) {
-                                            // Handle click for string
-                                            onCardClick(item)
-                                        }
+                                        onCardClick(item)
                                         Log.d("Message", "card clicked")
                                     },
                                 colors = CardDefaults.cardColors(
                                     containerColor = Color.White
                                 )
                             ) {
-                                if (showBuildingListCard && item is RoomToBuilding) {
-                                    Text(item.buildingName, modifier = Modifier.padding(16.dp))
-                                    Text(item.roomName, modifier = Modifier.padding(16.dp))
-                                } else if (!showBuildingListCard && item is String) {
-                                    Text(item, modifier = Modifier.padding(16.dp))
-                                }
+
+                                Text(item, modifier = Modifier.padding(16.dp))
                             }
                         }
                     }
