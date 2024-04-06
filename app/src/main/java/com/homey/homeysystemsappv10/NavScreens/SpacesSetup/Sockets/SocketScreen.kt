@@ -23,7 +23,6 @@ import com.patrykandpatrick.vico.core.axis.AxisPosition
 @Composable
 fun SocketScreen(viewModel: SocketsViewModel = viewModel()) {
 
-    var socketState by remember { mutableStateOf(true) }
 
 
     Scaffold(
@@ -97,9 +96,20 @@ fun SocketScreen(viewModel: SocketsViewModel = viewModel()) {
                     Text(
                         "Value in Watts ",
                         modifier = Modifier
-                            .padding(start = 8.dp),
+                            .padding(start = 8.dp)
+                            .weight(0.8f),
                         style = TextStyle(fontSize = 24.sp)
                     )
+
+                    Text(
+                        "${viewModel.sumValue}",
+                        modifier = Modifier
+                            .padding(start = 8.dp)
+                            .weight(0.2f),
+                        style = TextStyle(fontSize = 24.sp)
+                    )
+
+
                 }
 
             }

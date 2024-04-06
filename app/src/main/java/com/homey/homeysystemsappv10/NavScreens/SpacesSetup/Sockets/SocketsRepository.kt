@@ -49,4 +49,32 @@ class SocketsRepository {
 
         return socketStatusFlow
     }
+
+    // Function to calculate the sum of numerical values in Socket Data and emit it as a flow
+    fun getSumValue(): Flow<Int> {
+        val sumFlow = MutableStateFlow(0)
+        val dataDocRef = socketDocRef.collection("Socket Data")
+        dataDocRef.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                // Handle error
+                return@addSnapshotListener
+            }
+
+            try {
+                if (snapshot != null) {
+                    var sum = 0
+                    for (doc in snapshot.documents) {
+                        val value = doc.getString("value") ?: "0"
+                        sum += value.toInt()
+                    }
+                    sumFlow.value = sum
+                }
+            }catch (e: Exception){
+                Log.d("Message", "There is an error")
+            }
+
+        }
+
+        return sumFlow
+    }
 }
