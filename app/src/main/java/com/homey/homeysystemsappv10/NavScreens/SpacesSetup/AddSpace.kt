@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -22,13 +23,13 @@ import com.homey.homeysystemsappv10.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomDialog(
-    onDismiss: ()-> Unit,
+    onDismiss: () -> Unit,
     onCancel: () -> Unit,
     onDone: () -> Unit,
-    title: String,
-    spaceName: String, // Parameter to receive building name
+    title: String ,
+    spaceName: String , // Parameter to receive building name
     onSpaceNameChange: (String) -> Unit,
-    showBuildingListCard: Boolean
+    showBuildingListCard: @Composable () -> Unit
 
 ) {
     //Sheet state that fully expands when invoked
@@ -43,12 +44,14 @@ fun CustomDialog(
 
         //Drag handle composable
         dragHandle = {
-            BottomSheetTopBar(onCancel= onCancel,
-            onDone = onDone,
+            BottomSheetTopBar(
+                onCancel = onCancel,
+                onDone = onDone,
                 title = "Add To $title"
-        ) }
-    ){
-        addSpaceContent(spaceName,onSpaceNameChange, showBuildingListCard)
+            )
+        }
+    ) {
+        addSpaceContent(spaceName, onSpaceNameChange, showBuildingListCard)
     }
 }
 
@@ -58,7 +61,7 @@ fun addSpaceContent(
     //Initialize the viewModel to invoke writes to the database
     spaceName: String, // Parameter to receive building name
     onSpaceNameChange: (String) -> Unit,
-    showBuildingListCard: Boolean
+    showBuildingListCard: @Composable () -> Unit
 
 ) {
 
@@ -87,9 +90,9 @@ fun addSpaceContent(
 
         Spacer(modifier = Modifier.padding(16.dp))
 
-        if (showBuildingListCard){
-            buildingsListCard()
-        }
+        showBuildingListCard()
+
+        Spacer(modifier = Modifier.padding(16.dp))
 
         Text(
             "BACKGROUND PHOTO"
@@ -179,7 +182,7 @@ fun BottomSheetTopBar(
     onCancel: () -> Unit,
     onDone: () -> Unit,
     title: String
-){
+) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -196,11 +199,13 @@ fun BottomSheetTopBar(
 //Imported function from TopAppBar
 @Composable
 fun CancelTextButton(
-    onCancel : () -> Unit
+    onCancel: () -> Unit
 ) {
-    TextButton(onClick = {onCancel() },
+    TextButton(
+        onClick = { onCancel() },
         modifier = Modifier
-            .padding(8.dp)) {
+            .padding(8.dp)
+    ) {
         Text("Cancel")
     }
 }
@@ -210,9 +215,11 @@ fun CancelTextButton(
 fun DoneTextButton(
     onDone: () -> Unit
 ) {
-    TextButton(onClick = {onDone() },
+    TextButton(
+        onClick = { onDone() },
         modifier = Modifier
-            .padding(8.dp)) {
+            .padding(8.dp)
+    ) {
         Text("Done")
     }
 }
@@ -230,3 +237,4 @@ fun MyTextField(text: String, modifier: Modifier = Modifier, onTextChange: (Stri
     )
 
 }
+

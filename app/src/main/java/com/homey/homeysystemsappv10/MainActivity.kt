@@ -14,6 +14,7 @@ import com.homey.homeysystemsappv10.NavScreens.HomeScreen.HomeScreen
 import com.homey.homeysystemsappv10.NavScreens.LogInScreen
 import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.AllRoomsViewModel
 import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.buildingsListCard
+import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.Sockets.SocketScreen
 import com.homey.homeysystemsappv10.ui.theme.HomeySystemsAppV1_0Theme
 import com.homey.viewmodeltester.SpacesSetup.RoomScreen.RoomsViewModel
 
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    StartNav()
+                    SocketScreen()
                 }
             }
         }
