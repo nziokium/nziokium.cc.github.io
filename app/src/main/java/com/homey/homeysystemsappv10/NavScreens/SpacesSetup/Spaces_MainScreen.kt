@@ -47,7 +47,7 @@ fun spacesMainScreen(
 ) {
     Scaffold(
         topBar = {
-            TopScreenBar("${title}s", {
+            TopScreenBar("${title}", {
                 BackButtonIcon(
                     onClick = {
                         onBackButtonPressed()

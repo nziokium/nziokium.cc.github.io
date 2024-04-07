@@ -1,12 +1,13 @@
 package com.homey.viewmodeltester.SpacesSetup.RoomScreen
 
+import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.homey.homeysystemsappv10.NavRoutes
 import com.homey.viewmodeltester.SpacesSetup.spacesMainScreen
 
 @Composable
-fun roomScreen(
+fun roomsScreen(
     navController: NavHostController,
     viewModel: RoomsViewModel // Initialize RoomViewModel with buildingName
 ) {
@@ -19,6 +20,10 @@ fun roomScreen(
         isDialogShown = viewModel.isDialogShown,
         onCancelClick = { viewModel.onCancelClick() },
         addSpace = { viewModel.addRoom() },
+        onCardClick = { spaceName ->
+            Log.d("SpaceName", "Space name: $spaceName")
+            navController.navigate(NavRoutes.IndividualRoomsScreen.route + "/$spaceName" + "/${viewModel.buildingName}")
+        },
         spaceName = viewModel.roomName,
         onSpaceNameChange = {viewModel.roomName = it},
         onBackButtonPressed = { navController.popBackStack() }

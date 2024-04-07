@@ -15,7 +15,7 @@ fun buildingScreen(
     navController: NavController
 ) {
     spacesMainScreen(
-        title = "Building",
+        title = "Buildings",
         fabButtonClick = {
             viewModel.onAddClick()
             Log.d("Message", "The button was clicked")

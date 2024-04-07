@@ -3,19 +3,20 @@ package com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.homey.viewmodeltester.SpacesSetup.RoomScreen.ReadFromRoom
 import kotlinx.coroutines.tasks.await
 
-
+data class GetSocket(
+    var name: String = ""
+)
 
 class AllRoomsRepository {
 
     val db = Firebase.firestore
-    suspend fun fetchAllRooms(): Map<String, List<ReadFromRoom>> {
+    suspend fun fetchAllRooms(): Map<String, List<GetSocket>> {
         return try {
             val buildingQuerySnapshot = db.collection("Buildings").get().await()
 
-            val roomsMap = mutableMapOf<String, List<ReadFromRoom>>()
+            val roomsMap = mutableMapOf<String, List<GetSocket>>()
 
             for (buildingDocument in buildingQuerySnapshot.documents) {
                 val buildingName = buildingDocument.id
@@ -24,9 +25,9 @@ class AllRoomsRepository {
                     .get()
                     .await()
 
-                val rooms = mutableListOf<ReadFromRoom>()
+                val rooms = mutableListOf<GetSocket>()
                 for (roomDocument in roomsQuerySnapshot.documents) {
-                    val room = roomDocument.toObject(ReadFromRoom::class.java)
+                    val room = roomDocument.toObject(GetSocket::class.java)
                     room?.let {
                         rooms.add(it)
                     }

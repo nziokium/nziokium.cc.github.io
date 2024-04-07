@@ -7,5 +7,6 @@ sealed class NavRoutes(val route: String) {
     object AnalyticsScreen: NavRoutes("analyticsscreen")
     object Rooms : NavRoutes("roomscreen")
     object AllRoomsScreen: NavRoutes("allroomsScreen")
+    object IndividualRoomsScreen: NavRoutes("individualRoomsScreen")
 
 }

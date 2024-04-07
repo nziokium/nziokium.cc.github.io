@@ -15,21 +15,27 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BackButton
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.TopScreenBar
 import com.homey.homeysystemsappv10.R
 
-@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun individualRoomsScreen() {
+fun individualRoomsScreen(
+    navController: NavController,
+    viewModel: IndividualRoomsViewModel
+) {
+
+
 
     val numbers = listOf(1, 2, 3, 4, 5)
     Scaffold(
         topBar =
         {
             TopScreenBar(
-                text = "",
-                leftAction = { BackButton(onClick = {/*TODO*/ }) }
+                text = viewModel._roomName,
+                leftAction = { BackButton(onClick = {navController.popBackStack() }) }
 
             )
         }
@@ -49,7 +55,7 @@ fun individualRoomsScreen() {
                 LazyColumn(
                     verticalArrangement = Arrangement.Center
                 ) {
-                    items(numbers) { item ->
+                    items(viewModel.socketList) { socket ->
                         Card {
                             Row(
                                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -59,7 +65,7 @@ fun individualRoomsScreen() {
                                     .clickable { /*TODO*/ }
                             ) {
                                 Text(
-                                    " Switch $item",
+                                    socket,
                                     modifier = Modifier
                                         .padding(8.dp)
                                 )

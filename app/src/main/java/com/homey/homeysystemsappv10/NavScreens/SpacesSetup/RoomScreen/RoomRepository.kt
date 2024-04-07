@@ -45,7 +45,7 @@ class RoomRepository{
                     rooms.add(it)
                 }
             }
-            Log.d("Success", "Rooms Fetched")
+            Log.d("Success", "Rooms Fetched from Building")
             rooms
         } catch (e: Exception) {
             // Handle exceptions
