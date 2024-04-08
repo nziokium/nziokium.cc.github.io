@@ -9,20 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.compose.foundation.Image
 
 import androidx.compose.material3.Button
-import androidx.compose.ui.draw.clip
 import androidx.navigation.NavHostController
 import com.homey.homeysystemsappv10.NavRoutes
-import com.homey.homeysystemsappv10.NavScreens.AnalyticsScreen.TrialChart
+import com.homey.homeysystemsappv10.TrialChart
 import com.homey.homeysystemsappv10.R
-import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
-import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
 
 
 @Composable

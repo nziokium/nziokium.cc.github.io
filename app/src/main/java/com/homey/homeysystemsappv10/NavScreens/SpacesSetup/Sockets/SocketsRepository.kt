@@ -12,15 +12,19 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.callbackFlow
 
 
-class SocketsRepository {
+class SocketsRepository(
+    private var buildingName: String = "",
+    private var roomName: String = "",
+    private var socketName: String = ""
+) {
     private val db = FirebaseFirestore.getInstance()
 
     private val socketDocRef = db.collection("Buildings")
-        .document("Building 1")
+        .document(buildingName)
         .collection("Rooms")
-        .document("Room 1")
+        .document(roomName)
         .collection("Sockets")
-        .document("Socket 1")
+        .document(socketName)
 
     fun updateSwitchState(newState: Boolean) {
         socketDocRef.update("switchState", newState)

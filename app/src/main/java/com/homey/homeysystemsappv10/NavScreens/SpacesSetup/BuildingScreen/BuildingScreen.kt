@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.homey.homeysystemsappv10.NavRoutes
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BuildingsViewModel
+import com.homey.viewmodeltester.SpacesSetup.SearchButtonIcon
 import com.homey.viewmodeltester.SpacesSetup.spacesMainScreen
 
 @Composable
@@ -15,7 +16,7 @@ fun buildingScreen(
     navController: NavController
 ) {
     spacesMainScreen(
-        title = "Building",
+        title = "Buildings",
         fabButtonClick = {
             viewModel.onAddClick()
             Log.d("Message", "The button was clicked")
@@ -30,6 +31,7 @@ fun buildingScreen(
         },
         spaceName = viewModel.buildingName,
         onSpaceNameChange = {viewModel.buildingName = it},
-        onBackButtonPressed = {navController.popBackStack()}
+        onBackButtonPressed = {navController.popBackStack()},
+        leftAction = { SearchButtonIcon() }
     )
 }

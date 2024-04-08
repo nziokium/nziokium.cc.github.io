@@ -43,17 +43,18 @@ fun spacesMainScreen(
     spaceName: String = "",
     onSpaceNameChange: (String) -> Unit = {},
     onBackButtonPressed: () -> Unit = {},
-    showBuildingListCard: @Composable () -> Unit = {}
+    showBuildingListCard: @Composable () -> Unit = {},
+    leftAction: @Composable ()-> Unit = {}
 ) {
     Scaffold(
         topBar = {
-            TopScreenBar("${title}s", {
+            TopScreenBar("${title}", {
                 BackButtonIcon(
                     onClick = {
                         onBackButtonPressed()
                     }
                 )
-            }, { SearchButtonIcon() })
+            }, { leftAction() })
         },
         floatingActionButton = {
             FloatingActionButton(

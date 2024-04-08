@@ -1,11 +1,13 @@
 package com.homey.homeysystemsappv10
 
 sealed class NavRoutes(val route: String) {
-    object LogInScreen : NavRoutes("loginscreen")
-    object HomeScreen : NavRoutes("homescreen")
-    object Building : NavRoutes("buildingscreen")
-    object AnalyticsScreen: NavRoutes("analyticsscreen")
-    object Rooms : NavRoutes("roomscreen")
-    object AllRoomsScreen: NavRoutes("allroomsScreen")
+    object LogInScreen : NavRoutes("loginScreen")
+    object HomeScreen : NavRoutes("homeScreen")
+    object Building : NavRoutes("buildingScreen")
+    object AnalyticsScreen: NavRoutes("analyticsScreen")
+    object Rooms : NavRoutes("roomScreen")
+    object AllRoomsScreen: NavRoutes("allRoomsScreen")
+    object IndividualRoomsScreen: NavRoutes("individualRoomsScreen")
+    object SocketScreen: NavRoutes("socketScreen")
 
 }
