@@ -17,8 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.homey.homeysystemsappv10.NavRoutes
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BackButton
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.TopScreenBar
+import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.analyticsButton
 import com.homey.homeysystemsappv10.R
 
 @Composable
@@ -26,7 +28,6 @@ fun individualRoomsScreen(
     navController: NavController,
     viewModel: IndividualRoomsViewModel
 ) {
-
 
 
     val numbers = listOf(1, 2, 3, 4, 5)
@@ -62,7 +63,9 @@ fun individualRoomsScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { /*TODO*/ }
+                                    .clickable {
+                                        navController.navigate(NavRoutes.SocketScreen.route + "/$socket" + "/${viewModel._roomName}" +"/${viewModel._buildingName}")
+                                    }
                             ) {
                                 Text(
                                     socket,

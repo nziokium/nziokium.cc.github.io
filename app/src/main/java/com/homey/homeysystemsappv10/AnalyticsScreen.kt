@@ -1,10 +1,7 @@
-package com.homey.homeysystemsappv10.NavScreens.AnalyticsScreen
+package com.homey.homeysystemsappv10
 
-import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -15,19 +12,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.homey.homeysystemsappv10.NavRoutes
+import com.homey.homeysystemsappv10.NavScreens.AnalyticsScreen.AnalyticsScreenViewModel
 
-import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BackButton
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.TopScreenBar
-import com.homey.homeysystemsappv10.R
 import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.axis.vertical.rememberEndAxis
-import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
 import com.patrykandpatrick.vico.compose.chart.CartesianChartHost
 import com.patrykandpatrick.vico.compose.chart.layer.rememberColumnCartesianLayer
 import com.patrykandpatrick.vico.compose.chart.rememberCartesianChart
@@ -199,14 +192,13 @@ fun TrialChart(viewModel: AnalyticsScreenViewModel = viewModel()) {
         }
 
     LaunchedEffect(Unit) {
-        // Launch a coroutine for any asynchronous or time-consuming task
-        withContext(Dispatchers.Default) {
+
             // Update the chart model or perform any other task
             modelProducer.tryRunTransaction {
                 columnSeries { series(data.values) }
                 updateExtras { it[labelListKey] = data.keys.toList() }
             }
-        }
+
     }
 
     if (viewModel.isDataLoaded) {

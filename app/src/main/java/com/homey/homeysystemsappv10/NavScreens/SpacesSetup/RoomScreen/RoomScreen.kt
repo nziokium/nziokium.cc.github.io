@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.homey.homeysystemsappv10.NavRoutes
+import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.analyticsButton
 import com.homey.viewmodeltester.SpacesSetup.spacesMainScreen
 
 @Composable
@@ -26,6 +27,7 @@ fun roomsScreen(
         },
         spaceName = viewModel.roomName,
         onSpaceNameChange = {viewModel.roomName = it},
-        onBackButtonPressed = { navController.popBackStack() }
+        onBackButtonPressed = { navController.popBackStack() },
+        leftAction = { analyticsButton() }
     )
 }

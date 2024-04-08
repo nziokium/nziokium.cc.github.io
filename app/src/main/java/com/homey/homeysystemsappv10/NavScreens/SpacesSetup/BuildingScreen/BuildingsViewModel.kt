@@ -3,7 +3,6 @@ package com.homey.homeysystemsappv10.NavScreens.BuildingScreen
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.BuildingName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

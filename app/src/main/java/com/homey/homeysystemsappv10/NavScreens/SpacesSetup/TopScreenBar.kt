@@ -77,6 +77,19 @@ fun BackButton(
     }
 }
 
+@Composable
+fun analyticsButton(
+    onClick: () -> Unit = {}
+){
+    IconButton(
+        onClick = {onClick}
+    ){
+        Image(
+            painterResource(R.drawable.baseline_bar_chart_24),
+            contentDescription = "Analytics graph"
+        )
+    }
+}
 
 @Preview(showBackground = true, showSystemUi = false)
 @Composable

@@ -1,6 +1,5 @@
 package com.homey.homeysystemsappv10.NavScreens.SpacesSetup.Sockets
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
@@ -12,25 +11,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.text.*
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BackButton
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.TopScreenBar
-import com.homey.viewmodeltester.SpacesSetup.BackButtonIcon
-import com.patrykandpatrick.vico.core.axis.AxisPosition
 
-@Preview(showSystemUi = true, showBackground = true)
+
 @Composable
-fun SocketScreen(viewModel: SocketsViewModel = viewModel()) {
-
-
+fun socketScreen(
+    navController: NavController,
+    viewModel: SocketsViewModel = viewModel()) {
 
     Scaffold(
         topBar =
         {
             TopScreenBar(
                 "Socket 1",
-                { BackButton(onClick = {/*TODO*/ }) }
+                { BackButton(onClick = {navController.popBackStack()}) }
             )
         }
     ) { innerPadding ->
@@ -90,22 +87,22 @@ fun SocketScreen(viewModel: SocketsViewModel = viewModel()) {
                 ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .height(40.dp)
+                        .fillMaxSize()
                 ) {
                     Text(
                         "Value in Watts ",
                         modifier = Modifier
-                            .padding(start = 8.dp)
-                            .weight(0.8f),
+                            .padding(start = 8.dp),
                         style = TextStyle(fontSize = 24.sp)
                     )
 
                     Text(
                         "${viewModel.sumValue}",
                         modifier = Modifier
-                            .padding(start = 8.dp)
-                            .weight(0.2f),
+                            .padding(end = 8.dp),
                         style = TextStyle(fontSize = 24.sp)
                     )
 

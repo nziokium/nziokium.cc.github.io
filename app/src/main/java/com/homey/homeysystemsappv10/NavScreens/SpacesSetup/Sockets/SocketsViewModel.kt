@@ -9,12 +9,22 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 
-class SocketsViewModel : ViewModel() {
+class SocketsViewModel(
+    private var socketName: String = "",
+    private var roomName: String = "",
+    private var buildingName: String = ""
+) : ViewModel() {
+
+
     var bool by mutableStateOf(true)
     var name by mutableStateOf("on")
     var sumValue by mutableStateOf(0)
 
-    private val socketsRepository = SocketsRepository()
+    private val socketsRepository = SocketsRepository(
+        socketName = socketName,
+        roomName = roomName,
+        buildingName = buildingName
+    )
 
     init {
         // Collect the shared flow for socket status from the repository

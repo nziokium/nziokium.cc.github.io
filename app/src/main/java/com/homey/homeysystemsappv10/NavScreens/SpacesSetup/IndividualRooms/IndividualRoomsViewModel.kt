@@ -21,6 +21,7 @@ class IndividualRoomsViewModel(
     }
 
     var _roomName = roomName
+    var _buildingName = buildingName
 
     private val roomsViewModel = RoomsViewModel()
 
