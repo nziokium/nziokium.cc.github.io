@@ -20,6 +20,7 @@ class SocketsViewModel(
     var name by mutableStateOf("on")
     var sumValue by mutableStateOf(0)
 
+
     private val socketsRepository = SocketsRepository(
         socketName = socketName,
         roomName = roomName,
@@ -42,6 +43,7 @@ class SocketsViewModel(
                 // Update the sumValue property
                 sumValue = sum
             }
+
         }
     }
 

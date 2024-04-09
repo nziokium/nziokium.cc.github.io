@@ -21,12 +21,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.homey.homeysystemsappv10.BackButtonIcon
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.CustomDialog
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.BuildingsViewModel
 import com.homey.homeysystemsappv10.NavScreens.BuildingScreen.TopScreenBar
 import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.AllRoomsViewModel
 import com.homey.homeysystemsappv10.NavScreens.SpacesSetup.AllRoomsScreen.RoomToBuilding
 import com.homey.homeysystemsappv10.R
+import com.homey.homeysystemsappv10.ui.theme.*
 
 
 //Spaces Screen Blueprint
@@ -44,111 +46,114 @@ fun spacesMainScreen(
     onSpaceNameChange: (String) -> Unit = {},
     onBackButtonPressed: () -> Unit = {},
     showBuildingListCard: @Composable () -> Unit = {},
-    leftAction: @Composable ()-> Unit = {}
+    leftAction: @Composable () -> Unit = {}
 ) {
-    Scaffold(
-        topBar = {
-            TopScreenBar("${title}", {
-                BackButtonIcon(
-                    onClick = {
-                        onBackButtonPressed()
-                    }
-                )
-            }, { leftAction() })
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { fabButtonClick() },
-                shape = CircleShape
-            ) {
-                Icon(
-                    Icons.Default.Add,
-                    contentDescription = "Add"
 
-                )
+
+
+        Scaffold(
+            topBar = {
+                TopScreenBar("${title}", {
+                    BackButtonIcon(
+                        onClick = {
+                            onBackButtonPressed()
+                        }
+                    )
+                }, { leftAction() })
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = { fabButtonClick() },
+                    shape = CircleShape
+                ) {
+                    Icon(
+                        Icons.Default.Add,
+                        contentDescription = "Add"
+
+                    )
+                }
             }
-        }
-    ) { innerPadding ->
+        ) { innerPadding ->
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
             ) {
-                items(itemArray.chunked(2)) { rowItems ->
-                    LazyRow(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        items(rowItems) { item ->
-                            ElevatedCard(
-                                shape = RoundedCornerShape(16.dp),
-                                elevation = CardDefaults.cardElevation(5.dp),
-                                modifier = Modifier
-                                    .height(160.dp)
-                                    .width(175.dp)
-                                    .padding(8.dp)
-                                    .border(width = 2.dp, color = Color.Black, shape = RoundedCornerShape(16.dp))
-                                    .clickable {
-                                        onCardClick(item)
-                                        Log.d("Message", "card clicked")
-                                    },
-                                colors = CardDefaults.cardColors(
-                                    containerColor = Color.White
-                                )
-                            ) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                ) {
+                    items(itemArray.chunked(2)) { rowItems ->
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            items(rowItems) { item ->
+                                Card(
+                                    shape = RoundedCornerShape(16.dp),
+                                    colors = CardDefaults.cardColors(
+                                        containerColor = getHorizontalGradientColor(blackStart, blackEnd, 0.5f)
+                                    ),
+                                    modifier = Modifier
+                                        .height(160.dp)
+                                        .width(175.dp)
+                                        .padding(8.dp)
+                                        .clickable {
+                                            onCardClick(item)
+                                            Log.d("Message", "card clicked")
+                                        }
+                                ) {
 
-                                Text(item, modifier = Modifier.padding(16.dp))
+                                    Text(item, modifier = Modifier.padding(16.dp),
+                                        color = Color.White)
+                                }
                             }
                         }
                     }
                 }
             }
+            if (isDialogShown) {
+                CustomDialog(
+                    onDismiss = { onCancelClick() },
+                    onCancel = { onCancelClick() },
+                    onDone = { addSpace() },
+                    title = title,
+                    spaceName = spaceName,
+                    onSpaceNameChange = onSpaceNameChange,
+                    showBuildingListCard = showBuildingListCard
+                )
+            }
         }
-        if (isDialogShown) {
-            CustomDialog(
-                onDismiss = { onCancelClick() },
-                onCancel = { onCancelClick() },
-                onDone = { addSpace() },
-                title = title,
-                spaceName = spaceName,
-                onSpaceNameChange = onSpaceNameChange,
-                showBuildingListCard = showBuildingListCard
+    }
+
+
+    //Create the Search Icon
+    @Composable
+    fun SearchButtonIcon() {
+        IconButton(onClick = {/*TODO*/ }) {
+            Image(
+                painterResource(R.drawable.carbon_search),
+                contentDescription = "SearchButton"
+            )
+        }
+
+    }
+
+    //Imported function
+    @Composable
+    fun BackButtonIcon(
+        onClick: () -> Unit
+    ) {
+        Box(
+            modifier = Modifier
+                .clickable { onClick() }
+        ) {
+            Image(
+                painterResource(R.drawable.backicon),
+                contentDescription = "Back Action"
             )
         }
     }
-}
 
-
-//Create the Search Icon
-@Composable
-fun SearchButtonIcon() {
-    IconButton(onClick = {/*TODO*/ }) {
-        Image(
-            painterResource(R.drawable.carbon_search),
-            contentDescription = "SearchButton"
-        )
-    }
-
-}
-
-//Imported function
-@Composable
-fun BackButtonIcon(
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .clickable { onClick() }
-    ) {
-        Image(
-            painterResource(R.drawable.backicon),
-            contentDescription = "Back Action"
-        )
-    }
-}

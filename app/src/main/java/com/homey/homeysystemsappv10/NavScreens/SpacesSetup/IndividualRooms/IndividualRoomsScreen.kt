@@ -76,7 +76,7 @@ fun individualRoomsScreen(
                                     onClick = { /*TODO*/ } // Invoke the onClick lambda
                                 ) {
                                     Image(
-                                        painterResource(R.drawable.backicon),
+                                        painterResource(R.drawable.ic_round_navigate_next),
                                         contentDescription = "BackButton"
                                     )
                                 }
